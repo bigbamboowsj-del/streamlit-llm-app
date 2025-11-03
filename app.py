@@ -24,7 +24,7 @@ user_input = st.text_input("質問を入力してください：")
 
 if st.button("実行"):
     if not user_input:
-        st.warning("質問を入力してください。")
+        st.error("質問を入力してください。")
 
     else:
         if selected_item == "転職の専門家":
@@ -46,7 +46,11 @@ if st.button("実行"):
 
     response = chat.invoke([system_message, human_message])
 
-st.divider()
-
-st.write("### 回答:")
-st.write(response.content)
+    try:
+        response = chat.invoke([system_message, human_message])
+        st.divider()
+        st.write("### 回答:")
+        st.write(response.content)
+    except Exception as e:
+        st.error("エラーが発生しました。APIキーまたは環境設定を確認してください。")
+        st.error(str(e))
