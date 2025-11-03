@@ -44,7 +44,7 @@ if st.button("実行"):
         openai_api_key=os.getenv("OPENAI_API_KEY")
     )
 
-    response = chat([system_message, human_message])
+    response = chat.invoke([system_message, human_message])
 
 st.divider()
 
